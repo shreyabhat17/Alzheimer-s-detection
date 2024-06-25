@@ -1,1 +1,3 @@
 # Alzheimer-s-detection
+
+This project focuses on leveraging deep learning, specifically employing a Convolutional Neural Network (CNN) with the DenseNet169 architecture, for the classification of different stages of Alzheimer's disease using brain MRI images. Alzheimer's disease, a neurodegenerative disorder, necessitates timely and accurate diagnosis to facilitate effective intervention and patient care. The dataset is preprocessed using Keras's ImageDataGenerator, incorporating data augmentation techniques and resizing to ensure consistency in image dimensions. The dataset comprises distinct classes representing stages of Alzheimer's disease, including Mild Dementia, Moderate Dementia, Non-Dementia, and Very Mild Dementia.
