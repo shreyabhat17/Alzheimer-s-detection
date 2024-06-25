@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alzheimer's Detection</title>
+    <!-- Add any CSS styling -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Add custom styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        #imagePreview {
+            max-width: 400px;
+            max-height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        input[type="file"],
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white; /* Change button color to white */
+            color: blue;
+            border: 1px solid blue; /* Add border to button */
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            color: white;
+            background-color: blue;
+            border: none;
+        }
+
+        p {
+            color: blue;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Alzheimer's Detection</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+        <br>
+        <div id="imagePreview"></div>
+        <br>
+        <input type="submit" value="Predict" style="display: none;">
+    </form>
+
+    <p id="predictionResult"></p> <!-- Placeholder for prediction result -->
+
+    <script>
+        // JavaScript to show image preview and predict button
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('imagePreview');
+                output.innerHTML = '<img src="' + reader.result + '" style="width:100%;height:auto;">';
+                document.querySelector('input[type="submit"]').style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        var uploadInput = document.getElementById('imageUpload');
+        uploadInput.addEventListener('change', previewImage);
+        {% if prediction %}
+        document.getElementById('predictionResult').innerText = 'Prediction: {{ prediction }}';
+        {% endif %}
+        // Sample prediction result (replace with actual result)
+
+    </script>
+</body>
+</html>
